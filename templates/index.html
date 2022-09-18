@@ -1,15 +1,59 @@
 <!DOCTYPE html>
-<html>
-
-
-  <body>
-    <h1>It's Live streaming Dood!!!!</h1>
-    <div>
-
-        <img src="{{ url_for('video') }}" width="50%"/>
-    </div>
-            
-    </body>
-
-
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web App</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+	<style>
+		.jumbotron{
+			border: 10px solid rgba(0,0,0,0.5);
+			border-width: 10px;	
+			height: 510px;
+			width: 670px;
+			background-color: powderblue;
+			padding-top: 5px;
+		}
+		body{
+			margin-top: 20px;
+		}
+		
+	</style>
+</head>
+<body>
+	<center>
+		<!-- <div class="jumbotron" id="container">
+			<video autoplay="true"></video> -->
+		<div>
+      		<img class ="jumbotron" id="container" src="{{ url_for('video') }}"/>
+		</div><br>
+		
+	</center>
+	<center>
+		<div class="container">
+		<button class="btn btn-success" onclick="startWebCam()">Start</button>
+		<button class="btn btn-danger" onclick="stopWebCam()">Stop</button>
+		</div>
+	</center>
+    
+	<script type="text/javascript">
+		var video = document.querySelector("video");
+		function startWebCam() {
+			if (navigator.mediaDevices.getUserMedia) {
+				navigator.mediaDevices.getUserMedia({ video: true })
+			    	// .then(function (stream) {
+			      // 		video.srcObject = stream;
+			    	// })
+			    	// .catch(function (err0r) {
+			      // 		console.log("Something went wrong!");
+			    	// });
+			}
+		}
+		function stopWebCam(){
+			video.pause();
+		}
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+</body>
 </html>
