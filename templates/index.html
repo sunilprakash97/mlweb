@@ -1,74 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>ML Web Application</title>
-		<!-- CSS FILES -->
-		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/uikit@latest/dist/css/uikit.min.css">
-		<style>
-			.lead {
-				font-size: 1.175em;
-				font-weight: 300;
-			}
-			.uk-logo img {
-				height: 28px;
-			}
-		</style>
-	</head>
-	<body>
-    <div class="uk-light wrap uk-background-norepeat uk-background-cover uk-background-center-center uk-cover-container uk-background-secondary">
-      <img data-srcset="https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2064&q=80"
-           sizes="100vw"
-           data-src="https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2064&q=80" alt="" data-uk-cover data-uk-img>
-      <div class="uk-flex uk-flex-center uk-flex-middle uk-height-viewport uk-position-z-index uk-position-relative" data-uk-height-viewport="min-height: 400" style="background-color: rgba(0, 0, 0, 0.5);">
-        <!-- NAV -->
-        <div class="uk-position-top">
-          <div class="uk-container uk-container-small">
-            <nav class="uk-navbar-container uk-navbar-transparent" data-uk-navbar>
-              <div class="uk-navbar-left">
-                <div class="uk-navbar-item">
-                  <a class="uk-logo" href=""><img src="/logo.jpeg" alt="Logo"></a>
-                </div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ML Web Application</title>
+  <!-- CSS FILES -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/uikit@latest/dist/css/uikit.min.css">
+  <style>
+    .lead {
+      font-size: 1.175em;
+      font-weight: 300;
+    }
+    .uk-logo img {
+      height: 28px;
+    }
+    .modal-bg {
+      opacity: 0.99;
+      background: rgba(240, 250, 255, 0.7);
+      backdrop-filter: blur(2px);
+      border-radius: 10px;
+      box-sizing: border-box;
+    }
+    .modal-img {
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    .modal-button {
+      color: white;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div
+    class="uk-light wrap uk-background-norepeat uk-background-cover uk-background-center-center uk-cover-container uk-background-secondary">
+    <img
+      data-srcset="https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2064&q=80"
+      sizes="100vw"
+      data-src="https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2064&q=80"
+      alt="" data-uk-cover data-uk-img>
+    <div class="uk-flex uk-flex-center uk-flex-middle uk-height-viewport uk-position-z-index uk-position-relative"
+      data-uk-height-viewport="min-height: 400" style="background-color: rgba(0, 0, 0, 0.5);">
+      <!-- NAV -->
+      <div class="uk-position-top">
+        <div class="uk-container uk-container-small">
+          <nav class="uk-navbar-container uk-navbar-transparent" data-uk-navbar>
+            <div class="uk-navbar-left">
+              <div class="uk-navbar-item">
+                <a class="uk-logo" href=""><img src="/logo.jpeg" alt="Logo"></a>
               </div>
-              <div class="uk-navbar-right">
-                <ul class="uk-navbar-nav">
-                  <li class="uk-active uk-visible@m"><a href="" data-uk-icon="home"></a></li>
-				  <li class="uk-visible@s"><a href="https://github.com/sunilprakash97" target = "_blank">About Me</a></li>
-                </ul>
-              </div>
-            </nav>
-          </div>
-        </div>
-        <!-- /NAV -->
-        <!-- TEXT -->
-        <div class="uk-container uk-container-small uk-flex-auto uk-text-center" data-uk-scrollspy="target: > .animate; cls: uk-animation-slide-bottom-small uk-invisible; delay: 300">
-          <h1 class="uk-heading-primary animate uk-invisible" style="font-weight: 700;">Real Time Face Detection</h1>
-          <div class="uk-width-4-5@m uk-margin-auto animate uk-invisible">
-            <p class="lead">You can use it to detect a person's Gender and Age</p>
-          </div>
-          <div class="uk-margin-medium-top animate uk-invisible" data-uk-margin data-uk-scrollspy-class="uk-animation-fade uk-invisible">
-            <a href="#modal-media-image" target="_blank" class="uk-button uk-button-primary uk-button-large uk-width-2-3 uk-width-auto@s" onclick uk-toggle title="Learn More">TRY IT OUT</a>
-            <a href= https://github.com/sunilprakash97/mlweb  target="_blank" class="uk-button uk-button-default uk-button-large uk-width-2-3 uk-width-auto@s" data-uk-icon="arrow-right" title="Learn More">Source Code</a>
-          </div>
-        </div>
-        
-        <div id="modal-media-image" class="uk-flex-top" uk-modal>
-            <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical">
-                <button class="uk-modal-close-outside" type="button" uk-close></button>
-				<img src="{{ url_for('video') }}" width ="720" height="1200" alt="">
-                <!-- <img src="maxresdefault.jpeg" width ="720" height="1200" alt=""> -->
             </div>
+            <div class="uk-navbar-right">
+              <ul class="uk-navbar-nav">
+                <li class="uk-active uk-visible@m"><a href="" data-uk-icon="home"></a></li>
+                <li class="uk-visible@s"><a href="https://github.com/sunilprakash97" target="_blank">About Me</a></li>
+              </ul>
+            </div>
+          </nav>
         </div>
-        <!-- FOOT -->
-        <div class="uk-position-bottom-center uk-position-small">
-          <span class="uk-text-small uk-text-center">© 2022 | <a href="https://github.com/sunilprakash97" target = "_blank" footer">Created by Sunilprakash Jaisankar</a> </span></a></span>
-        </div>
-        <!-- /FOOT -->
       </div>
-    </div>	
-		<!-- JS FILES -->
-		<script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit-icons.min.js"></script>
-	</body>
+      <!-- /NAV -->
+      <!-- TEXT -->
+      <div class="uk-container uk-container-small uk-flex-auto uk-text-center"
+        data-uk-scrollspy="target: > .animate; cls: uk-animation-slide-bottom-small uk-invisible; delay: 300">
+        <h1 class="uk-heading-primary animate uk-invisible" style="font-weight: 700;">Real Time Face Detection</h1>
+        <div class="uk-width-4-5@m uk-margin-auto animate uk-invisible">
+          <p class="lead">You can use it to detect a person's Gender and Age</p>
+        </div>
+        <div class="uk-margin-medium-top animate uk-invisible" data-uk-margin
+          data-uk-scrollspy-class="uk-animation-fade uk-invisible">
+          <a href="#modal-container" target="_blank"
+            class="uk-button uk-button-primary uk-button-large uk-width-2-3 uk-width-auto@s" onclick uk-toggle
+            title="Learn More">TRY IT OUT</a>
+          <a href=https://github.com/sunilprakash97/mlweb target="_blank"
+            class="uk-button uk-button-default uk-button-large uk-width-2-3 uk-width-auto@s" data-uk-icon="arrow-right"
+            title="Learn More">Source Code</a>
+        </div>
+      </div>
+      <div id="modal-container" class="uk-modal-medium " uk-modal>
+        <div class="uk-modal-dialog uk-modal-body modal-bg uk-width-xlarge uk-margin-auto-vertical">
+          <button class="uk-modal-close-default" style="color: black;" type="button" uk-close></button>
+          <h2 class="uk-modal-title uk-text-center" style="font-weight:700; font-size: 2em; color: black;">You are Live now !!!!</h2>
+          <img src="{{ url_for('video') }}" class="modal-img" alt="">
+          <div class="uk-text-center uk-margin-small-top">
+            <a class="uk-button uk-margin-auto uk-button-secondary modal-button"  target="_blank"
+              href="http://127.0.0.1:5000/snap">SNAP SHOT</a>
+          </div>
+        </div>
+      </div>
+      <!-- FOOT -->
+      <div class="uk-position-bottom-center uk-position-small">
+        <span class="uk-text-small uk-text-center">© 2022 | <a href="https://github.com/sunilprakash97" target="_blank"
+            footer>Created by Sunilprakash Jaisankar</a> </span></a></span>
+      </div>
+      <!-- /FOOT -->
+    </div>
+  </div>
+  <!-- JS FILES -->
+  <script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit-icons.min.js"></script>
+</body>
 </html>

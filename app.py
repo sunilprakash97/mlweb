@@ -70,6 +70,29 @@ def generate_frames():
         yield(b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
+def generate_frames_snap():
+    while True:
+        success,frame=camera.read()
+        if not success:
+            break
+        else:
+            frameFace, bboxes = faceBox(faceNet, frame)
+            for bbox in bboxes:
+                face = frame[bbox[1]:bbox[3],bbox[0]:bbox[2]]
+                blob = cv2.dnn.blobFromImage(face, 1.0, (227, 227), MODEL_MEAN_VALUES, swapRB=False)
+                genderNet.setInput(blob)
+                genderPreds = genderNet.forward()
+                gender = genderList[genderPreds[0].argmax()]
+                ageNet.setInput(blob)
+                agePreds = ageNet.forward()
+                age = ageList[agePreds[0].argmax()]
+                label = "{},{}".format(gender, age)
+                cv2.putText(frameFace, label, (bbox[0], bbox[1]-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 255), 2, cv2.LINE_AA)
+            ret,buffer = cv2.imencode('.jpg',frameFace)
+            frame = buffer.tobytes()
+        return(b'--frame\r\n'
+                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -77,6 +100,10 @@ def index():
 @app.route('/video')
 def video():
     return Response(generate_frames(),mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/snap')
+def snap():
+    return Response(generate_frames_snap(),mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__=="__main__":
     app.run(debug = True)    
