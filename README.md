@@ -1,5 +1,3 @@
-Readme.txt
-
 Follow these 4 steps to execute the program:
 
 1. python -m venv venv
