@@ -49,20 +49,23 @@ camera = cv2.VideoCapture(0)
 
 def generate_frames():
     while True:
-        success,frame=camera.read()
+        success,frame = camera.read()
         if not success:
             break
         else:
             frameFace, bboxes = faceBox(faceNet, frame)
             for bbox in bboxes:
-                face = frame[bbox[1]:bbox[3],bbox[0]:bbox[2]]
-                blob = cv2.dnn.blobFromImage(face, 1.0, (227, 227), MODEL_MEAN_VALUES, swapRB=False)
+                face = frame[max(0, bbox[1]-20):min(bbox[3]+20, frame.shape[0]-1), max(0,bbox[0]-20):min(bbox[2]+20, frame.shape[1]-1)]
+                blob = cv2.dnn.blobFromImage(face, 1.0, (227, 227), MODEL_MEAN_VALUES, swapRB = False)
+                
                 genderNet.setInput(blob)
                 genderPreds = genderNet.forward()
                 gender = genderList[genderPreds[0].argmax()]
+                        
                 ageNet.setInput(blob)
                 agePreds = ageNet.forward()
                 age = ageList[agePreds[0].argmax()]
+            
                 label = "{},{}".format(gender, age)
                 cv2.putText(frameFace, label, (bbox[0], bbox[1]-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 255), 2, cv2.LINE_AA)
             ret,buffer = cv2.imencode('.jpg',frameFace)
@@ -78,8 +81,8 @@ def generate_frames_snap():
         else:
             frameFace, bboxes = faceBox(faceNet, frame)
             for bbox in bboxes:
-                face = frame[max(0,bbox[1]-20):min(bbox[3]+20,frame.shape[0]-1),max(0,bbox[0]-20):min(bbox[2]+20, frame.shape[1]-1)]
-                blob = cv2.dnn.blobFromImage(face, 1.0, (227, 227), MODEL_MEAN_VALUES, swapRB=False)
+                face = frame[bbox[1]:bbox[3],bbox[0]:bbox[2]]
+                blob = cv2.dnn.blobFromImage(face, 1.0, (227, 227), MODEL_MEAN_VALUES, swapRB = False)
                 genderNet.setInput(blob)
                 genderPreds = genderNet.forward()
                 gender = genderList[genderPreds[0].argmax()]
