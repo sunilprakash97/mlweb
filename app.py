@@ -78,7 +78,7 @@ def generate_frames_snap():
         else:
             frameFace, bboxes = faceBox(faceNet, frame)
             for bbox in bboxes:
-                face = frame[bbox[1]:bbox[3],bbox[0]:bbox[2]]
+                face = frame[max(0,bbox[1]-20):min(bbox[3]+20,frame.shape[0]-1),max(0,bbox[0]-20):min(bbox[2]+20, frame.shape[1]-1)]
                 blob = cv2.dnn.blobFromImage(face, 1.0, (227, 227), MODEL_MEAN_VALUES, swapRB=False)
                 genderNet.setInput(blob)
                 genderPreds = genderNet.forward()
